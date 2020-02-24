@@ -1,13 +1,68 @@
 # Gatsby, Firebase and Redux Starter Kit
 
 ## What is it?
-This repo is a Starter Kit that uses Gatsby starter, Firebase Plugin for Gatsby and Redux.
+A Starter Kit with Gatsby starter, Firebase Plugin and Redux.
 
 [Gatsby Starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-default/)
 
 [Firebase Plugin](https://www.gatsbyjs.org/packages/gatsby-plugin-firebase/)
 
 [Redux](https://github.com/reduxjs/react-redux)
+
+## Firebase
+This Starter has a Firebase lib **(lib/firebase.js)** that exports a Hook that initialise the **onAuthStateChanged** event and stores *iFirebaseReady* and *userAuth* in Redux
+```
+export const useFirebaseHook = () => {
+  useFirebase(firebaseApp => {
+    firebase = firebaseApp
+
+    const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+      if (user && user.uid) {
+        await onLogin(user.uid)
+      } else {
+        store.dispatch(setFirebaseReady(!!user))
+        store.dispatch(setUserAuth(user))
+      }
+    })
+
+    return function cleanup() {
+      unsubscribe()
+    }
+  }, [])
+}
+```
+This lib also can handle login and logout events inside the Firebase App.
+
+### Using Firebase in Comps
+Firebase plugin exports a React hook **useFirebase**. It uses the same API as React.useEffect, except for that in the first argument, the function has firebase as its parameter.
+The idea is that to get Firebase to work in both client-side environment and SSR without any UX compromises, you have to take special care of the Firebase initialization. Thanks to React Hook, you can use useFirebase in a kinda-nice way. Without it, you’d have to constantly check whether firebase is initialized or not (if not, it's null).
+```
+import React from "react"
+import { FirebaseContext } from "gatsby-plugin-firebase"
+
+function MyComponent({ firebase }) {
+  const firebase = React.useContext(FirebaseContext)
+  const [user, setUser] = React.useState()
+
+  React.useEffect(() => {
+    if (!firebase) {
+      return
+    }
+    
+    firebase
+      .database()
+      .ref("/user")
+      .once("value")
+      .then(snapshot => {
+        setUser(snapshot.val())
+      })
+  }, [firebase])
+
+  return <p>Hello {user ? user.name : "there"}</p>
+}
+
+export default MyComponent
+```
 
 ## 🚀 Quick start
 
