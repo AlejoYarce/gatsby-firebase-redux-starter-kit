@@ -1,11 +1,9 @@
 # Gatsby, Firebase and Redux Starter Kit
+A Starter Kit based on Gatsby starter default, Gatsby Firebase Plugin, Redux and React Emotion.
 
-## What is it?
-A Starter Kit with Gatsby starter, Firebase Plugin and Redux.
+[Gatsby Starter Default](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-default/)
 
-[Gatsby Starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-default/)
-
-[Firebase Plugin](https://www.gatsbyjs.org/packages/gatsby-plugin-firebase/)
+[Gatsby Firebase Plugin](https://www.gatsbyjs.org/packages/gatsby-plugin-firebase/)
 
 [Redux](https://github.com/reduxjs/react-redux)
 
