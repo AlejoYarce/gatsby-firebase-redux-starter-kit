@@ -16,9 +16,6 @@ const IndexPage = () => {
     </div> */}
 
     <Login />
-
-    <br />
-    <Link to="/events/">Go to page 2</Link>
   </Layout>
 )}
 
