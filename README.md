@@ -1,5 +1,5 @@
 # Gatsby, Firebase and Redux Starter Kit
-A Starter Kit based on Gatsby starter default, Gatsby Firebase Plugin, Redux and React Emotion.
+A Starter Kit based on Gatsby starter default, Gatsby Firebase Plugin, Redux and React Emotion. Have a quick way to check if Firebase App is ready and if a user exists.
 
 [Gatsby Starter Default](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-default/)
 
